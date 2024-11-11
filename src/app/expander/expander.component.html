@@ -1,0 +1,24 @@
+<mat-list-item class="exp-list-item" (click)="isExpanded = !isExpanded" [disableRipple]="true">
+    <div class="exp-list-item-header-container">
+        <a matLine class="exp-list-item-header-title">{{title}}</a>
+        <a matLine class="exp-list-item-header-desc">{{selectedItem.name | uppercase}}</a>
+    </div>
+    <span>
+        <mat-icon style="margin-top: 7px;" *ngIf="!isExpanded">expand_more</mat-icon>
+        <mat-icon style="margin-top: 7px;" *ngIf="isExpanded">expand_less</mat-icon>
+    </span>
+</mat-list-item>
+<div [hidden]="!isExpanded" class="exp-list-item-selection-div">
+    <div></div>
+</div>
+
+<div class="exp-list-item-separator"></div>
+
+<div [hidden]="!isExpanded">
+    <mat-selection-list multiple="false" hideSingleSelectionIndicator="true">
+        <mat-list-option *ngFor="let item of itemsSource" (click)="selectionChanged(item.id)" [selected]="item.isChecked">
+            <div class="exp-list-option-selection-line" [hidden]="!item.isChecked"></div>
+            {{ item.name | uppercase }}
+        </mat-list-option>
+    </mat-selection-list>
+</div>
